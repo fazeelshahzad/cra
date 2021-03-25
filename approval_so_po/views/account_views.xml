@@ -9,12 +9,12 @@
                        <button string="Approve Payment" groups="account.group_account_manager" class="oe_highlight" type="object" name="action_manager_approve" attrs="{'invisible': [('state','!=', 'manager')]}"/>
                         <button string="Reject" type="object" groups="account.group_account_manager" name="action_reject" attrs="{'invisible': [('state','!=', 'manager')]}"/>
                 </xpath>
-<!--                <xpath expr="//header/button[@name='button_cancel']" position="attributes">-->
-<!--                    <attribute name="groups">account.group_account_manager</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//header/button[@name='button_draft']" position="attributes">-->
-<!--                    <attribute name="groups">account.group_account_manager</attribute>-->
-<!--                </xpath>-->
+                <xpath expr="//header/button[@name='mark_as_sent']" position="attributes">
+                    <attribute name="groups">account.group_account_manager</attribute>
+                </xpath>
+                <xpath expr="//header/button[@name='action_draft']" position="attributes">
+                    <attribute name="groups">account.group_account_manager</attribute>
+                </xpath>
                 <xpath expr="//field[@name='date']" position="after">
                     <field name="x_css" />
                  </xpath>

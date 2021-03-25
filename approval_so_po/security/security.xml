@@ -14,4 +14,15 @@
 <!--        <field name="groups" eval="[(4, ref('approval_so_po.group_view_only_user'))]"/>-->
 <!--    </record>-->
 
+<!--    <record id="account_move_rule_group_View_only" model="ir.rule">-->
+<!--        <field name="name">View Only</field>-->
+<!--        <field name="model_id" ref="account.model_account_invoice_report"/>-->
+<!--        <field name="domain_force">[(1, '=', 1)]</field>-->
+<!--        <field name="groups" eval="[(4, ref('approval_so_po.group_view_only_user'))]"/>-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="False"/>-->
+<!--        <field name="perm_create" eval="False"/>-->
+<!--        <field name="perm_unlink" eval="False"/>-->
+<!--    </record>-->
+
 </odoo>

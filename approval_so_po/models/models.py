@@ -19,6 +19,20 @@ class SaleOrderInh(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
 
+    x_css = fields.Html(string='CSS', sanitize=False, compute='_compute_css', store=False)
+
+    @api.depends('state')
+    def _compute_css(self):
+        for application in self:
+            # Modify below condition
+            if self.env.user.has_group('approval_so_po.group_sale_remove_edit_user') and application.state != 'draft':
+                application.x_css = '<style>.o_form_button_edit {display: none !important;}</style>'
+            else:
+                application.x_css = False
+
+    def action_reject(self):
+        self.state = 'draft'
+
     def action_confirm(self):
         self.state = 'manager'
 
@@ -38,6 +52,19 @@ class PurchaseOrderInh(models.Model):
         ('done', 'Locked'),
         ('cancel', 'Cancelled')
     ], string='Status', readonly=True, index=True, copy=False, default='draft', tracking=True)
+    x_css = fields.Html(string='CSS', sanitize=False, compute='_compute_css', store=False)
+
+    @api.depends('state')
+    def _compute_css(self):
+        for application in self:
+            # Modify below condition
+            if self.env.user.has_group('approval_so_po.group_purchase_remove_edit_user') and application.state != 'draft':
+                application.x_css = '<style>.o_form_button_edit {display: none !important;}</style>'
+            else:
+                application.x_css = False
+
+    def action_reject(self):
+        self.state = 'draft'
 
     def button_confirm(self):
         self.state = 'manager'
@@ -68,8 +95,22 @@ class AccountMoveInh(models.Model):
     ], string='Status', required=True, readonly=True, copy=False, tracking=True,
         default='draft')
 
+    x_css = fields.Html(string='CSS', sanitize=False, compute='_compute_css', store=False)
+
+    @api.depends('state')
+    def _compute_css(self):
+        for application in self:
+            # Modify below condition
+            if self.env.user.has_group(
+                    'approval_so_po.group_account_remove_edit_user') and application.state != 'draft':
+                application.x_css = '<style>.o_form_button_edit {display: none !important;}</style>'
+            else:
+                application.x_css = False
+
+    def action_reject(self):
+        self.state = 'draft'
+
     def action_post(self):
-        print(self.invoice_origin)
         if self.invoice_origin:
             sale_order = self.env['sale.order'].search([('name', '=', self.invoice_origin)])
             purchase_order = self.env['purchase.order'].search([('name', '=', self.invoice_origin)])
@@ -143,6 +184,21 @@ class StockPickingInh(models.Model):
              " * Ready: The transfer is ready to be processed.\n(a) The shipping policy is \"As soon as possible\": at least one product has been reserved.\n(b) The shipping policy is \"When all products are ready\": all product have been reserved.\n"
              " * Done: The transfer has been processed.\n"
              " * Cancelled: The transfer has been cancelled.")
+
+    x_css = fields.Html(string='CSS', sanitize=False, compute='_compute_css', store=False)
+
+    @api.depends('state')
+    def _compute_css(self):
+        for application in self:
+            # Modify below condition
+            if self.env.user.has_group(
+                    'approval_so_po.group_stock_remove_edit_user') and application.state not in ['assigned', 'draft']:
+                application.x_css = '<style>.o_form_button_edit {display: none !important;}</style>'
+            else:
+                application.x_css = False
+
+    def action_reject(self):
+        self.state = 'assigned'
 
     def button_validate(self):
         flag = False

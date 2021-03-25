@@ -84,6 +84,30 @@ class PurchaseOrderInh(models.Model):
         return True
 
 
+class AccountPaymentInh(models.Model):
+    _inherit = 'account.payment'
+
+    x_css = fields.Html(string='CSS', sanitize=False, compute='_compute_css', store=False)
+
+    @api.depends('state')
+    def _compute_css(self):
+        for application in self:
+            # Modify below condition
+            if self.env.user.has_group(
+                    'approval_so_po.group_account_remove_edit_user') and application.state != 'draft':
+                application.x_css = '<style>.o_form_button_edit {display: none !important;}</style>'
+            else:
+                application.x_css = False
+
+    def action_post(self):
+        self.state = 'manager'
+
+    def action_reject(self):
+        self.state = 'draft'
+
+    def action_manager_approve(self):
+        record = super(AccountPaymentInh, self).action_post()
+
 class AccountMoveInh(models.Model):
     _inherit = 'account.move'
 

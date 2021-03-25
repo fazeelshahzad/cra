@@ -8,7 +8,6 @@
                 <xpath expr="//header/button[@name='button_validate']" position="after">
                     <button string="Approve DO" groups="stock.group_stock_manager" class="oe_highlight" type="object" name="action_manager_approve" attrs="{'invisible': [('state','!=', 'manager')]}"/>
                     <button string="Reject" type="object" groups="stock.group_stock_manager" name="action_reject" attrs="{'invisible': [('state','!=', 'manager')]}"/>
-
                 </xpath>
                 <xpath expr="//header/button[@name='action_cancel']" position="attributes">
                     <attribute name="groups">stock.group_stock_manager</attribute>
@@ -19,21 +18,8 @@
                 <xpath expr="//field[@name='user_id']" position="after">
                     <field name="x_css" />
                  </xpath>
-<!--                <xpath expr="//field[@name='user_id']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='partner_id']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='scheduled_date']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='origin']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='quantity_done']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','in', 'manager')]}</attribute>-->
-<!--                </xpath>-->
+
             </field>
         </record>
+
 </odoo>

@@ -108,6 +108,27 @@ class AccountPaymentInh(models.Model):
     def action_manager_approve(self):
         record = super(AccountPaymentInh, self).action_post()
 
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        result = super(AccountPaymentInh, self).fields_view_get(
+            view_id=view_id, view_type=view_type, toolbar=toolbar,
+            submenu=submenu)
+        if self.env.user.has_group('account.group_account_manager'):
+            pass
+        elif self.env.user.has_group('approval_so_po.group_view_only_user'):
+            temp = etree.fromstring(result['arch'])
+            temp.set('duplicate', '0')
+            temp.set('edit', '0')
+            temp.set('create', '0')
+            temp.set('delete', '0')
+            result['arch'] = etree.tostring(temp)
+        else:
+            temp = etree.fromstring(result['arch'])
+            temp.set('duplicate', '0')
+            temp.set('delete', '0')
+            result['arch'] = etree.tostring(temp)
+        return result
+
 class AccountMoveInh(models.Model):
     _inherit = 'account.move'
 

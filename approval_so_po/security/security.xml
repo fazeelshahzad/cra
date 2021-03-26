@@ -29,22 +29,5 @@
         <field name="name">View Only</field>
         <field name="category_id" ref="approval_so_po.accounting_approvals_groups_root"/>
     </record>
-<!--    <record id="account_move_rule_group_invoice_view" model="ir.rule">-->
-<!--        <field name="name">Readonly Move View</field>-->
-<!--        <field name="model_id" ref="model_account_move"/>-->
-<!--        <field name="domain_force">[(1, '=', 1)]</field>-->
-<!--        <field name="groups" eval="[(4, ref('approval_so_po.group_view_only_user'))]"/>-->
-<!--    </record>-->
-
-<!--    <record id="sale_order_rule_group_View_only" model="ir.rule">-->
-<!--        <field name="name">Sale Order Write Disable</field>-->
-<!--        <field name="model_id" ref="model_sale_order"/>-->
-<!--        <field name="domain_force">[(1, '=', 1)]</field>-->
-<!--        <field name="groups" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>-->
-<!--        <field name="perm_read" eval="True"/>-->
-<!--        <field name="perm_write" eval="False"/>-->
-<!--        <field name="perm_create" eval="True"/>-->
-<!--        <field name="perm_unlink" eval="True"/>-->
-<!--    </record>-->
 
 </odoo>

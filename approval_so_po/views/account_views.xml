@@ -40,7 +40,7 @@
                     <attribute name="groups">account.group_account_manager</attribute>
                 </xpath>
                 <xpath expr="//header/button[@name='action_register_payment']" position="attributes">
-                    <attribute name="groups">account.group_account_manager</attribute>
+                    <attribute name="groups">account.group_account_manager,account.group_account_invoice</attribute>
                 </xpath>
                 <xpath expr="//header/button[@name='action_reverse']" position="attributes">
                     <attribute name="groups">account.group_account_manager</attribute>
@@ -48,18 +48,6 @@
                 <xpath expr="//field[@name='invoice_user_id']" position="after">
                     <field name="x_css" />
                  </xpath>
-<!--                <xpath expr="//field[@name='invoice_line_ids']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='invoice_user_id']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='team_id']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
-<!--                <xpath expr="//field[@name='ref']" position="attributes">-->
-<!--                    <attribute name="attrs">{'readonly': [('state','!=', 'draft')]}</attribute>-->
-<!--                </xpath>-->
             </field>
         </record>
 

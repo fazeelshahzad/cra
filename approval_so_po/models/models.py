@@ -41,7 +41,7 @@ class StockMoveLineInh(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
-        if self.picking_id.state == 'manager' and self.picking_id.origin:
+        if self.picking_id.origin:
             raise UserError('You cannot add Product in this Stage')
 
 
@@ -50,7 +50,7 @@ class StockMoveInh(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
-        if self.picking_id.state == 'manager' and self.picking_id.origin:
+        if self.picking_id.origin:
             raise UserError('You cannot add Product in this Stage')
 
 
@@ -197,7 +197,7 @@ class AccountMoveLineInh(models.Model):
 
     @api.onchange('product_id')
     def onchange_product_id(self):
-        if self.move_id.state == 'manager' or self.move_id.invoice_origin:
+        if self.move_id.invoice_origin:
             raise UserError('You cannot add Product in this Stage')
 
 

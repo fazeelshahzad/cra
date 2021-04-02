@@ -17,6 +17,10 @@
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="x_css" />
             </xpath>
+            <xpath expr="//notebook/page/field[@name='move_ids_without_package']" position="inside">
+                <field name="x_css" />
+            </xpath>
+
         </field>
     </record>
 

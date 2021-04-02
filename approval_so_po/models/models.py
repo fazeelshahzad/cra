@@ -36,6 +36,25 @@ class StockScrapInh(models.Model):
                 application.x_css = False
 
 
+class StockMoveLineInh(models.Model):
+    _inherit = 'stock.move.line'
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        if self.picking_id.state == 'manager':
+            raise UserError('You cannot add Product in this Stage')
+
+
+class StockMoveInh(models.Model):
+    _inherit = 'stock.move'
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        print('Hello')
+        if self.picking_id.state == 'manager':
+            raise UserError('You cannot add Product in this Stage')
+
+
 class ResPartnerInh(models.Model):
     _inherit = 'res.partner'
 
@@ -172,6 +191,15 @@ class AccountPaymentInh(models.Model):
             temp.set('delete', '0')
             result['arch'] = etree.tostring(temp)
         return result
+
+
+class AccountMoveLineInh(models.Model):
+    _inherit = 'account.move.line'
+
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        if self.move_id.state == 'manager':
+            raise UserError('You cannot add Product in this Stage')
 
 
 class AccountMoveInh(models.Model):

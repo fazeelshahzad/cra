@@ -256,8 +256,18 @@ class AccountMoveInh(models.Model):
         return result
 
 
+class ProductTemplateInh(models.Model):
+    _inherit = 'product.template'
+
+    _sql_constraints = [
+        ('name_unique', 'unique(name)',
+         'Product with this name is already exist!'),
+    ]
+
+
 class StockPickingInh(models.Model):
     _inherit = 'stock.picking'
+
 
     state = fields.Selection([
         ('draft', 'Draft'),
